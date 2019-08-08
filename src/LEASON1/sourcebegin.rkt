@@ -2,8 +2,6 @@
 (require 2htdp/image)
 (require 2htdp/universe)
 
-
-
 (+ 2 3)
 (+ 2 2)
 (+ 3 3)
