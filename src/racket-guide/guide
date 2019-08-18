@@ -1,0 +1,87 @@
+#lang racket
+
+
+(list "red" "green" "blue")
+
+
+(map sqrt (list 1 4 9 16))
+
+(map (lambda(i)
+       (string-append i "!"))
+     (list "peanusts" "popcorn" "crackerjack"))
+
+
+(map (lambda (s n) (substring s 0 n))
+     (list "peanuts" "popcorn" "crackerjack")
+     (list 6 3 7))
+
+(filter string? (list "a" "b" 6))
+
+(filter positive? (list 1 -2 6 7 0))
+
+
+(foldl (lambda (elm v)
+         (+ v (* elm elm elm)))
+       0
+       '(1 2 3))
+
+
+(first (list 1 2 3))
+
+(rest (list 1 2 3))
+
+
+(define (my-length lst)
+  (cond
+    [(empty? lst) 0]
+    [else (+ 1 (my-length (rest lst)))]))
+
+(define (my-map f lst)
+  (cond
+    [(empty? lst) empty]
+    [else (cons (f (first lst))
+                (my-map f (rest lst)))]))
+
+
+(define (my-new-length lst)
+  (define (iter lst len)
+    (cond
+      [(empty? lst) len]
+      [else (iter (rest lst) (+ len 1))]))
+  (iter lst 0))
+
+
+
+(define (my-new-map f lst)
+  (define (iter lst backward-result)
+    (cond
+      [(empty? lst) (reverse backward-result)]
+      [else (iter (rest lst)
+                  (cons (f (first lst))
+                        backward-result))]))
+  (iter lst empty))
+
+
+
+(define (my-now-map f lst)
+  (for/list ([i lst])
+    (f i)))
+
+
+
+(define (remove-dups l)
+  (cond
+    [(empty? l) empty]
+    [(empty? (rest l)) l]
+    [else
+     (let ([i (first l)])
+       (if (equal? i (first (rest l)))
+           (remove-dups (rest l))
+           (cons i (remove-dups (res l)))))]))
+
+
+
+
+
+
+
